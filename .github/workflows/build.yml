@@ -15,8 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install rsync
-        run: |
-          apt-get update && apt-get install -y rsync
+        run: apk add --no-cache rsync
 
       - name: Install dependencies
         run: npm install

@@ -14,6 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install rsync
+        run: |
+          apt-get update && apt-get install -y rsync
+
       - name: Install dependencies
         run: npm install
 
@@ -26,3 +30,11 @@ jobs:
         with:
           name: docs
           path: docs/
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        if: contains(github.ref, 'refs/headsmain')
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true
